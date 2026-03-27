@@ -1,29 +1,15 @@
-
 services:
-  pruebatecsupermercado: #nombre de la app establecido en application.properties
-    build: pruebatecsupermercado #nombre de la carpeta donde está el DockerFile
+  pruebatecsupermercado: # nombre de tu app
+    build: pruebatecsupermercado
     mem_limit: 512m
     ports:
       - "8080:8080"
     environment:
-      DB_URL: jdbc:mysql://pruebatecsuper:3306/pruebatecsuper?createDatabaseIfNotExist=true&serverTimezone=UTC
-      DB_USER_NAME: nancy
-      DB_PASSWORD: 1234
+      SPRING_DATASOURCE_URL: jdbc:postgresql://dpg-d722nn4r85hc73co8frg-a.virginia-postgres.render.com:5432/supermercado_3ilu
+      SPRING_DATASOURCE_USERNAME: nancy
+      SPRING_DATASOURCE_PASSWORD: 7dTZQxyxuybZsgkjUMbx02vUcauXFisT
     restart: always
-    depends_on:
-      pruebatecsuper:
-        condition: service_healthy
-  pruebatecsuper: #configuraciones de base de datos dockerizada
-    image: mysql:8.0.33 #misma versión que esté en el pom
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: 1234 
-      MYSQL_USER: nancy
-      MYSQL_PASSWORD: 1234
-      MYSQL_DATABASE: pruebatecsuper
-    restart: always
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 10s
-      retries: 10
+
+# ⚠️ Nota:
+# Ya NO necesitas levantar un contenedor de MySQL local,
+# porque tu base está en Render (PostgreSQL gestionado).
