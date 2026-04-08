@@ -1,22 +1,15 @@
+FROM maven:3.8.5-openjdk-17 AS build
+WORKDIR /app
+COPY . .
+
+# Construimos el proyecto
+RUN mvn clean package -DeskipTests
+
+#Etapa 2: Ejecución (Runtime) -Imagen ligera
 FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 
-# Instalar Maven
-RUN apk add --no-cache maven
-
-# Copiar pom.xml y descargar dependencias
-COPY pom.xml .
-RUN mvn dependency:go-offline
-
-# Copiar el código fuente
-COPY src -/src
-
-# Compilar el proyecto y generar el jar
-RUN mvn clean package -DskipTests
-
-# Copiar el jar generado
-#ARG JAR_FILE=target/pruebaTecSupermercado-0.0.1.jar
-#COPY ${JAR_FILE} app_pruebatecsuper.jar
-
+#Copiamos el Jar desde la etapa anterior
+COPY --from=build /app/target/pruebaTecSupermercado-0.0.1.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "target/pruebaTecSupermercado-0.0.1.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
