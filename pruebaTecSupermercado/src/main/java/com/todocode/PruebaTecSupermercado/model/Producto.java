@@ -1,9 +1,6 @@
 package com.todocode.PruebaTecSupermercado.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter @Setter
@@ -11,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
+@Table(name = "producto")
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

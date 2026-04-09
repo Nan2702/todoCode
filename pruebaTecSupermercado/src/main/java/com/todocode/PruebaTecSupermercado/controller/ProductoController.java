@@ -10,7 +10,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/productos")
+@RequestMapping("/productos")
 public class ProductoController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class ProductoController {
     public  ResponseEntity<ProductoDTO> crearProducto(@RequestBody ProductoDTO dto){
         ProductoDTO creado = productoService.crearProducto(dto);
 
-        return ResponseEntity.created(URI.create("/api/producto" + creado.getId())).body(creado);
+        return ResponseEntity.created(URI.create("/producto" + creado.getId())).body(creado);
     }
 
     @PutMapping("/{id}")
