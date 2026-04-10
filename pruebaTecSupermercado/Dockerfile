@@ -3,7 +3,7 @@ WORKDIR /app
 COPY . .
 
 # Construimos el proyecto
-RUN mvn clean package -DeskipTests
+RUN mvn clean package -DskipTests
 
 #Etapa 2: Ejecución (Runtime) -Imagen ligera
 FROM eclipse-temurin:17-jdk-alpine
