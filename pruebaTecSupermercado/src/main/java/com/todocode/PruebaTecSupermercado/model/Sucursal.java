@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "sucursal")
+@Table(name = "sucursal", schema = "public")
 public class Sucursal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
